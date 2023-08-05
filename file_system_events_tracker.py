@@ -16,15 +16,15 @@ class FileEventHandler(FileSystemEventHandler):
 
     #1_on_created
     def on_created(self, event):
-        print(f"Hey {event.src.path} has been created!")
+        print(f"Hey {event.src_path} has been created!")
     #2_on_deleted
     def on_deleted(self, event):
-        print(f"Hey {event.src.path} has been deleted!")
+        print(f"Hey {event.src_path} has been deleted!")
     #3_on_modified
     def on_modified(self, event):
-        print(f"Hey {event.src.path} has been modified!")
+        print(f"Hey {event.src_path} has been modified!")
     #4_on_moved
-    def on_created(self, event):
+    def on_moved(self, event):
         print(f"Hey {event.src_path} has been moved to {event.dest_path}!")
         
 
@@ -44,11 +44,13 @@ observer.start()
 
 
 #5_Write a exception for keyboardInterrupt
-
-while True:
-    time.sleep(2)
-    print("running...")
-
+try:
+    while True:
+        time.sleep(2)
+        print("running...")
+except KeyboardInterrupt:
+    print("stopped")
+    observer.stop()
 
 
 
